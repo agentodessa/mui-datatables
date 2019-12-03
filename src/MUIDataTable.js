@@ -357,7 +357,7 @@ class MUIDataTable extends React.Component {
     }
     if (['scrollMaxHeight', 'scrollFullHeight', 'stacked', 'fitParent'].indexOf(this.options.responsive) === -1) {
       console.error(
-        'Invalid option value for responsive. Please use string option: scrollMaxHeight | scrollFullHeight | stacked',
+        'Invalid option value for responsive. Please use string option: scrollMaxHeight | scrollFullHeight | stacked  | fitParent',
       );
     }
     if (this.options.responsive === 'scroll') {
