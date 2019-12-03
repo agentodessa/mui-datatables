@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   entry: {
@@ -32,6 +33,10 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new BundleAnalyzerPlugin({
+      openAnalyzer: false, 
+      analyzerPort: 5151
+    }),
     new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
       'process.env': {

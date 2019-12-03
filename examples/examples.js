@@ -2,6 +2,7 @@ import ArrayValueColumns from './array-value-columns';
 import ColumnFilters from './column-filters';
 import ColumnOptionsUpdate from './column-options-update';
 import Component from './component';
+import FitParent from './fit-parent';
 import CSVExport from './csv-export';
 import CustomActionColumns from './custom-action-columns';
 import CustomizeColumns from './customize-columns';
@@ -67,4 +68,5 @@ export default {
   'Simple No Toolbar': SimpleNoToolbar,
   'Text Localization': TextLocalization,
   Themes: Themes,
+  FitParent: FitParent,
 };
