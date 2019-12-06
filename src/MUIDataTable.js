@@ -787,7 +787,7 @@ class MUIDataTable extends React.Component {
 
       displayRow.push(columnDisplay);
 
-      const columnVal = columnValue === null || columnValue === undefined ? '' : columnValue.toString();
+      const columnVal = columnValue === null || columnValue === void 0 ? '' : columnValue.toString();
 
       const filterVal = filterList[index];
       const caseSensitive = this.options.caseSensitive;
@@ -798,11 +798,7 @@ class MUIDataTable extends React.Component {
           if (column.filterOptions.logic(columnValue, filterVal)) isFiltered = true;
         } else if (filterType === 'textField' && !this.hasSearchText(columnVal, filterVal, caseSensitive)) {
           isFiltered = true;
-        } else if (
-          filterType !== 'textField' &&
-          Array.isArray(columnValue) === false &&
-          filterVal.indexOf(columnValue) < 0
-        ) {
+        } else if (filterType !== 'textField' && !Array.isArray(columnValue) && filterVal.indexOf(columnValue) < 0) {
           isFiltered = true;
         } else if (filterType !== 'textField' && Array.isArray(columnValue)) {
           //true if every filterVal exists in columnVal, false otherwise
@@ -906,6 +902,7 @@ class MUIDataTable extends React.Component {
       rowData: rowData,
       tableData: tableData,
       tableState: tableState,
+      ...tableState,
     };
   };
 
