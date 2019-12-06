@@ -4,7 +4,7 @@ import {createMuiTheme, MuiThemeProvider, withStyles} from '@material-ui/core/st
 import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import classnames from 'classnames';
+import clsx from 'clsx';
 
 const customStyles = {
   BusinessAnalystRow: {
@@ -63,7 +63,7 @@ class Example extends React.Component {
           filter: true,
           setCellProps: (value) => {
             return {
-              className: classnames(
+              className: clsx(
                 {
                   [this.props.classes.NameCell]: value === "Mel Brooks"
                 })
@@ -71,7 +71,7 @@ class Example extends React.Component {
           },
           setCellHeaderProps: (value) => {
             return {
-              className: classnames(
+              className: clsx(
                 {
                   [this.props.classes.NameCell]: true
                 }),
@@ -151,7 +151,7 @@ class Example extends React.Component {
       rowHover: false,
       setRowProps: (row) => {
         return {
-          className: classnames(
+          className: clsx(
             {
               [this.props.classes.BusinessAnalystRow]: row[1] === "Business Analyst"
             }),

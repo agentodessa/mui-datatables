@@ -103,24 +103,40 @@ export interface MUIDataTableFilterOptions {
 export interface MUIDataTableColumnOptions {
     customBodyRender?: (value: any, tableMeta: MUIDataTableMeta, updateValue: (s: any, c: any, p: any) => any) => string | React.ReactNode;
     customHeadRender?: (columnMeta: MUIDataTableCustomHeadRenderer, updateDirection: (params: any) => any) => string | React.ReactNode;
+    customFilterListRender?: (value: any) => string;
     display?: 'true' | 'false' | 'excluded';
     download?: boolean;
     empty?: boolean;
     filter?: boolean;
     filterList?: string[];
+    filterType?: FilterType;
     filterOptions?: MUIDataTableFilterOptions;
     hint?: string;
     print?: boolean;
     searchable?: boolean;
+    setCellHeaderProps?: (columnMeta: MUIDataTableCustomHeadRenderer) => object;
     setCellProps?: (cellValue: string, rowIndex: number, columnIndex: number) => object;
     sort?: boolean;
     sortDirection?: 'asc' | 'desc';
     viewColumns?: boolean;
 }
 
+export interface MUIDataTableIsRowCheck {
+    lookup: {
+        dataIndex: number;
+    };
+    data: [
+        {
+            index: number;
+            dataIndex: number;
+        }
+    ];
+}
+
 export interface MUIDataTableOptions {
     caseSensitive?: boolean;
     count?: number;
+    customFilterDialogFooter?: (filterList: any[]) => React.ReactNode;
     customFooter?: (
         rowCount: number,
         page: number,
@@ -129,9 +145,13 @@ export interface MUIDataTableOptions {
         changePage: number
     ) => React.ReactNode;
     customRowRender?: (data: any[], dataIndex: number, rowIndex: number) => React.ReactNode;
-
     customSearch?: (searchQuery: string, currentRow: any[], columns: any[]) => boolean;
-    customSearchRender?: (searchText: string, handleSearch: any, hideSearch: any, options: any) => React.Component | JSX.Element;
+    customSearchRender?: (
+        searchText: string,
+        handleSearch: any,
+        hideSearch: any,
+        options: any
+    ) => React.Component | JSX.Element;
     customSort?: (data: any[], colIndex: number, order: string) => any[];
     customToolbar?: () => React.ReactNode;
     customToolbarSelect?: (
@@ -142,15 +162,21 @@ export interface MUIDataTableOptions {
         displayData: Array<{ data: any[]; dataIndex: number }>,
         setSelectedRows: (rows: number[]) => void
     ) => React.ReactNode;
+    disableToolbarSelect?: boolean;
     download?: boolean;
-    downloadOptions?: { filename: string; separator: string };
+    downloadOptions?: {
+        filename: string;
+        separator: string;
+        filterOptions?: { useDisplayedColumnsOnly: boolean; useDisplayedRowsOnly: boolean };
+    };
     elevation?: number;
     expandableRows?: boolean;
     expandableRowsOnClick?: boolean;
     filter?: boolean;
-    filterType?: 'dropdown' | 'checkbox' | 'multiselect' | 'textField';
+    filterType?: FilterType;
     fixedHeader?: boolean;
-    isRowSelectable?: (dataIndex: number) => boolean;
+    isRowExpandable?: (dataIndex: number, expandedRows?: MUIDataTableIsRowCheck) => boolean;
+    isRowSelectable?: (dataIndex: number, selectedRows?: MUIDataTableIsRowCheck) => boolean;
     onCellClick?: (
         colData: any,
         cellMeta: { colIndex: number; rowIndex: number; dataIndex: number; event: React.MouseEvent }
@@ -164,13 +190,17 @@ export interface MUIDataTableOptions {
         buildBody: (data: any) => string,
         columns: any,
         data: any
-    ) => string;
-    onFilterChange?: (changedColumn: string, filterList: any[]) => void;
+    ) => BlobPart;
+    onFilterChange?: (changedColumn: string, filterList: any[], type: FilterType | 'chip' | 'reset') => void;
+    onFilterDialogOpen?: () => void;
+    onFilterDialogClose?: () => void;
     onRowClick?: (rowData: string[], rowMeta: { dataIndex: number; rowIndex: number }) => void;
     onRowsDelete?: (rowsDeleted: any[]) => void;
+    onRowsExpand?: (currentRowsExpanded: any[], allRowsExpanded: any[]) => void;
     onRowsSelect?: (currentRowsSelected: any[], rowsSelected: any[]) => void;
     onSearchChange?: (searchText: string) => void;
     onSearchOpen?: () => void;
+    onSearchClose?: () => void;
     onTableChange?: (action: string, tableState: MUIDataTableState) => void;
     onTableInit?: (action: string, tableState: MUIDataTableState) => void;
     page?: number;
@@ -185,11 +215,15 @@ export interface MUIDataTableOptions {
     rowsExpanded?: any[];
     rowsSelected?: any[];
     search?: boolean;
+    searchOpen?: boolean;
     searchPlaceholder?: string;
     searchText?: string;
     selectableRows?: SelectableRows;
+    selectableRowsHeader?: boolean;
     selectableRowsOnClick?: boolean;
+    setTableProps?: () => object;
     serverSide?: boolean;
+    serverSideFilterList?: any[];
     setRowProps?: (row: any[], rowIndex: number) => object;
     sort?: boolean;
     sortFilterList?: boolean;

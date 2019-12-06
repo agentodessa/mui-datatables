@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import Checkbox from '@material-ui/core/Checkbox';
 import TableCell from '@material-ui/core/TableCell';
 import IconButton from '@material-ui/core/IconButton';
@@ -105,17 +105,17 @@ class TableSelectCell extends React.Component {
       if (fixedHeaderOptions.yAxis) fixedHeaderClasses += ` ${classes.fixedHeaderYAxis}`;
     }
 
-    const cellClass = classNames({
+    const cellClass = clsx({
       [classes.root]: true,
       [fixedHeaderClasses]: true,
       [classes.headerCell]: isHeaderCell,
     });
 
-    const buttonClass = classNames({
+    const buttonClass = clsx({
       [classes.expandDisabled]: hideExpandButton,
     });
 
-    const iconClass = classNames({
+    const iconClass = clsx({
       [classes.icon]: true,
       [classes.hide]: isHeaderCell,
       [classes.expanded]: isRowExpanded,

@@ -3,7 +3,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Tooltip from '@material-ui/core/Tooltip';
 import HelpIcon from '@material-ui/icons/Help';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -126,7 +126,7 @@ class TableHeadCell extends React.Component {
       if (options.fixedHeaderOptions.yAxis) fixedHeaderClasses += ` ${classes.fixedHeaderYAxis}`;
     }
 
-    const cellClass = classNames({
+    const cellClass = clsx({
       [classes.root]: true,
       [fixedHeaderClasses]: true,
       'datatables-noprint': !print,
@@ -162,7 +162,7 @@ class TableHeadCell extends React.Component {
               className={classes.toolButton}
               tabIndex={0}>
               <div
-                className={classNames({
+                className={clsx({
                   [classes.data]: true,
                   [classes.sortActive]: sortActive,
                 })}>

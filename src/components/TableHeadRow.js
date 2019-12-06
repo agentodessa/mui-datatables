@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import TableRow from '@material-ui/core/TableRow';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -19,7 +19,7 @@ class TableHeadRow extends React.Component {
 
     return (
       <TableRow
-        className={classNames({
+        className={clsx({
           [classes.root]: true,
         })}>
         {this.props.children}

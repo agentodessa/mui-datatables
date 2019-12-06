@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import TableRow from '@material-ui/core/TableRow';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -34,7 +34,7 @@ class TableBodyRow extends React.Component {
       <TableRow
         hover={options.rowHover ? true : false}
         onClick={onClick}
-        className={classNames(
+        className={clsx(
           {
             [classes.root]: true,
             [classes.hover]: options.rowHover,

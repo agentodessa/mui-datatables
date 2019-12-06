@@ -1,6 +1,6 @@
 import { withStyles } from '@material-ui/core/styles';
 import MuiTableHead from '@material-ui/core/TableHead';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import React from 'react';
 import { findDOMNode } from 'react-dom';
 import TableHeadCell from './TableHeadCell';
@@ -57,7 +57,7 @@ class TableHead extends React.Component {
 
     return (
       <MuiTableHead
-        className={classNames({ [classes.responsiveStacked]: options.responsive === 'stacked', [classes.main]: true })}>
+        className={clsx({ [classes.responsiveStacked]: options.responsive === 'stacked', [classes.main]: true })}>
         <TableHeadRow>
           <TableSelectCell
             ref={el => setCellRef(0, findDOMNode(el))}

@@ -1,5 +1,5 @@
 import React from 'react';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import TableCell from '@material-ui/core/TableCell';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -61,7 +61,7 @@ class TableBodyCell extends React.Component {
     return [
       <TableCell
         key={1}
-        className={classNames(
+        className={clsx(
           {
             [classes.root]: true,
             [classes.cellHide]: true,
@@ -75,7 +75,7 @@ class TableBodyCell extends React.Component {
       <TableCell
         key={2}
         onClick={this.handleClick}
-        className={classNames(
+        className={clsx(
           {
             [classes.root]: true,
             [classes.responsiveStacked]: options.responsive === 'stacked',

@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 
 export const defaultFilterStyles = theme => ({
@@ -276,7 +276,7 @@ class TableFilter extends React.Component {
           <div className={classes.reset}>
             <Typography
               variant="body2"
-              className={classNames({
+              className={clsx({
                 [classes.title]: true,
               })}>
               {textLabels.title}
